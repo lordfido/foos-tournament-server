@@ -7,8 +7,6 @@ import { parseMatchDetailsButton } from './parser';
 // @ts-ignore
 export const getSeasonsHandler = (req, res) =>
   v1Api.getSeasons(v1Response => {
-    log('Server response', v1Response);
-
     const dom = new JSDOM(v1Response);
     const document = dom.window.document;
 
@@ -37,8 +35,8 @@ export const getSeasonsHandler = (req, res) =>
 
 // @ts-ignore
 export const getSeasonSummaryHandler = (req, res) => {
-  log('Param received', req.params.seasonId);
   const { seasonId } = req.params;
+  log('Param received', seasonId);
 
   return v1Api.getSeasonSummary(seasonId, v1Response => {
     const dom = new JSDOM(v1Response);
@@ -109,12 +107,10 @@ export const getSeasonSummaryHandler = (req, res) => {
 
 // @ts-ignore
 export const getSeasonHandler = (req, res) => {
-  log('Param received', req.params.seasonId);
   const { seasonId } = req.params;
+  log('Param received', seasonId);
 
   return v1Api.getSeason(seasonId, v1Response => {
-    log(v1Response);
-
     const dom = new JSDOM(v1Response);
     const document = dom.window.document;
 
@@ -127,7 +123,6 @@ export const getSeasonHandler = (req, res) => {
       .slice(1)
       .map(li => {
         const child = li.firstChild as HTMLElement;
-        log(child);
 
         if (child.dataset && child.dataset.divisionId) {
           return {

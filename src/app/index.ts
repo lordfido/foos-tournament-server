@@ -1,4 +1,6 @@
-import { SEASON_DIVISIONS, SEASON_SUMMARY, SEASONS } from '../constants/v2-routes';
+import { DIVISION, SEASON_DIVISIONS, SEASON_SUMMARY, SEASONS } from '../constants/v2-routes';
+
+import { getDivisionHandler } from './modules/divisions';
 import { getSeasonHandler, getSeasonsHandler, getSeasonSummaryHandler } from './modules/seasons';
 
 interface IEndpoint {
@@ -8,6 +10,7 @@ interface IEndpoint {
 }
 
 export const endpoints: IEndpoint[] = [
+  // Seasons
   {
     handler: getSeasonsHandler,
     method: 'get',
@@ -22,5 +25,12 @@ export const endpoints: IEndpoint[] = [
     handler: getSeasonHandler,
     method: 'get',
     path: SEASON_DIVISIONS,
+  },
+
+  // Divisions
+  {
+    handler: getDivisionHandler,
+    method: 'get',
+    path: DIVISION,
   },
 ];
