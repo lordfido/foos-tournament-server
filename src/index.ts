@@ -4,6 +4,7 @@ import { log } from './common/utils/logger';
 
 import { endpoints } from './app';
 
+const HOST = '0.0.0.0';
 const PORT = 4000;
 
 const initServer = () => {
@@ -33,8 +34,8 @@ const initServer = () => {
     app[method](path, handler);
   });
 
-  app.listen({ port: PORT }, () => {
-    log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  app.listen({ host: HOST, port: PORT }, () => {
+    log(`🚀 Server ready at http://${HOST}:${PORT}${server.graphqlPath}`);
   });
 };
 

@@ -1,5 +1,5 @@
 export const SEASONS = `/seasons`;
-export const SEASON_SUMMARY = `/seasons/summary/:seasonId`;
+export const SEASON_SUMMARY = `/seasons/:seasonId/summary`;
 export const SEASON_DIVISIONS = `/seasons/:seasonId`;
 
 export const DIVISION = `/divisions/:divisionId`;
