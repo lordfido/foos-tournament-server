@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 // import request from 'request';
 
-import { V1_SEASON, V1_SEASON_SUMMARY, V1_SEASONS, V1_DIVISION } from '../../constants/v1-routes';
+import { V1_DIVISION, V1_SEASON, V1_SEASON_SUMMARY, V1_SEASONS, V1_DIVISION_PLAYER } from '../../constants/v1-routes';
 import { log } from '../utils/logger';
 
 const v1Api = {
@@ -35,6 +35,14 @@ const v1Api = {
   // Divisions
   getDivision: (id: string, handler: (v1Response: any) => any) => {
     const url = V1_DIVISION.replace(':divisionId', id);
+
+    log('get', url);
+    return fetch(url)
+      .then(res => res.text())
+      .then(handler);
+  },
+  getPlayer: (division: string, playerId: string, handler: (v1Response: any) => any) => {
+    const url = V1_DIVISION_PLAYER.replace(':divisionId', division).replace(':playerId', playerId);
 
     log('get', url);
     return fetch(url)

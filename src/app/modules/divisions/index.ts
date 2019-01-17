@@ -91,3 +91,51 @@ export const getDivisionHandler = (req, res) => {
     });
   });
 };
+
+// @ts-ignore
+export const getPlayerHandler = (req, res) => {
+  const { divisionId, playerId } = req.params;
+  log('Param received', divisionId, playerId);
+
+  return v1Api.getPlayer(divisionId, playerId, v1Response => {
+    const dom = new JSDOM(v1Response);
+    const document = dom.window.document;
+
+    const rankingNode = document.querySelector('.classification-history-modal-content');
+    const journeys = rankingNode
+      ? Array.from(rankingNode.children)
+          .slice(2)
+          .map(div => {
+            const matches = Array.from(div.children[0].children[2].children[0].children)
+              .slice(1)
+              .map(tr => ({
+                isSelected: tr.classList.contains('active') || undefined,
+                player: tr.children[0].innerHTML,
+                wins: tr.children[1].innerHTML,
+              }));
+
+            const prevRanking = Array.from(div.children[1].children[0].children[0].children).map(tr => {
+              const pointsTd = tr.children[1].children[0] as HTMLElement;
+              return {
+                isSelected: tr.classList.contains('active') || undefined,
+                player: tr.children[0].innerHTML,
+                points: pointsTd.title,
+              };
+            });
+
+            const nextRanking = Array.from(div.children[1].children[0].children[0].children).map(tr => {
+              const pointsTd = tr.children[1].children[0] as HTMLElement;
+              return {
+                isSelected: tr.classList.contains('active') || undefined,
+                player: tr.children[0].innerHTML,
+                points: pointsTd.title,
+              };
+            });
+
+            return { matches, prevRanking, nextRanking };
+          })
+      : undefined;
+
+    return res.send(journeys);
+  });
+};
