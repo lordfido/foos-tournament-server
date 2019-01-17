@@ -1,6 +1,13 @@
-import { DIVISION, SEASON_DIVISIONS, SEASON_SUMMARY, SEASONS, DIVISION_PLAYER } from '../constants/v2-routes';
+import {
+  DIVISION,
+  DIVISION_HISTORY,
+  DIVISION_PLAYER,
+  SEASON_DIVISIONS,
+  SEASON_SUMMARY,
+  SEASONS,
+} from '../constants/v2-routes';
 
-import { getDivisionHandler, getPlayerHandler } from './modules/divisions';
+import { getDivisionHandler, getDivisionHistoryHandler, getPlayerHandler } from './modules/divisions';
 import { getSeasonHandler, getSeasonsHandler, getSeasonSummaryHandler } from './modules/seasons';
 
 interface IEndpoint {
@@ -32,6 +39,11 @@ export const endpoints: IEndpoint[] = [
     handler: getDivisionHandler,
     method: 'get',
     path: DIVISION,
+  },
+  {
+    handler: getDivisionHistoryHandler,
+    method: 'get',
+    path: DIVISION_HISTORY,
   },
   {
     handler: getPlayerHandler,

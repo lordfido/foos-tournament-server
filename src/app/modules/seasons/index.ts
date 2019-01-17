@@ -2,7 +2,7 @@ import { JSDOM } from 'jsdom';
 import { log } from '../../../common/utils/logger';
 
 import v1Api from '../../../common/apis/foos-v1';
-import { parseMatchDetailsButton } from './parser';
+import { parseMatchDetailsButton } from '../../utils/parser';
 
 // @ts-ignore
 export const getSeasonsHandler = (req, res) =>

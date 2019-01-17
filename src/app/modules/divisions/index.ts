@@ -2,7 +2,7 @@ import { JSDOM } from 'jsdom';
 import { log } from '../../../common/utils/logger';
 
 import v1Api from '../../../common/apis/foos-v1';
-import { parseMatchDetailsButton } from '../seasons/parser';
+import { parseMatchDetailsButton, parseHistoriTable } from '../../utils/parser';
 
 // @ts-ignore
 export const getDivisionHandler = (req, res) => {
@@ -93,49 +93,17 @@ export const getDivisionHandler = (req, res) => {
 };
 
 // @ts-ignore
+export const getDivisionHistoryHandler = (req, res) => {
+  const { divisionId } = req.params;
+  log('Param received', divisionId);
+
+  return v1Api.getDivisionHistoryHandler(divisionId, v1Response => res.send(parseHistoriTable(v1Response)));
+};
+
+// @ts-ignore
 export const getPlayerHandler = (req, res) => {
   const { divisionId, playerId } = req.params;
   log('Param received', divisionId, playerId);
 
-  return v1Api.getPlayer(divisionId, playerId, v1Response => {
-    const dom = new JSDOM(v1Response);
-    const document = dom.window.document;
-
-    const rankingNode = document.querySelector('.classification-history-modal-content');
-    const journeys = rankingNode
-      ? Array.from(rankingNode.children)
-          .slice(2)
-          .map(div => {
-            const matches = Array.from(div.children[0].children[2].children[0].children)
-              .slice(1)
-              .map(tr => ({
-                isSelected: tr.classList.contains('active') || undefined,
-                player: tr.children[0].innerHTML,
-                wins: tr.children[1].innerHTML,
-              }));
-
-            const prevRanking = Array.from(div.children[1].children[0].children[0].children).map(tr => {
-              const pointsTd = tr.children[1].children[0] as HTMLElement;
-              return {
-                isSelected: tr.classList.contains('active') || undefined,
-                player: tr.children[0].innerHTML,
-                points: pointsTd.title,
-              };
-            });
-
-            const nextRanking = Array.from(div.children[1].children[0].children[0].children).map(tr => {
-              const pointsTd = tr.children[1].children[0] as HTMLElement;
-              return {
-                isSelected: tr.classList.contains('active') || undefined,
-                player: tr.children[0].innerHTML,
-                points: pointsTd.title,
-              };
-            });
-
-            return { matches, prevRanking, nextRanking };
-          })
-      : undefined;
-
-    return res.send(journeys);
-  });
+  return v1Api.getPlayer(divisionId, playerId, v1Response => res.send(parseHistoriTable(v1Response, 2)));
 };
