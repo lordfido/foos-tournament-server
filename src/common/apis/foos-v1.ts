@@ -9,6 +9,7 @@ import {
   V1_SEASON,
   V1_SEASON_SUMMARY,
   V1_SEASONS,
+  V1_MATCH_SIMULATOR,
 } from '../../constants/v1-routes';
 import { log } from '../utils/logger';
 
@@ -22,8 +23,8 @@ const v1Api = {
       .then(res => res.text())
       .then(handler);
   },
-  getSeasonSummary: (id: string, handler: (v1Response: any) => any) => {
-    const url = V1_SEASON_SUMMARY.replace(':seasonId', id);
+  getSeasonSummary: (seasonId: string, handler: (v1Response: any) => any) => {
+    const url = V1_SEASON_SUMMARY.replace(':seasonId', seasonId);
 
     log('get', url);
     return fetch(url)
@@ -40,24 +41,34 @@ const v1Api = {
   },
 
   // Divisions
-  getDivision: (id: string, handler: (v1Response: any) => any) => {
-    const url = V1_DIVISION.replace(':divisionId', id);
+  getDivision: (divisionId: string, handler: (v1Response: any) => any) => {
+    const url = V1_DIVISION.replace(':divisionId', divisionId);
 
     log('get', url);
     return fetch(url)
       .then(res => res.text())
       .then(handler);
   },
-  getDivisionHistoryHandler: (id: string, handler: (v1Response: any) => any) => {
-    const url = V1_DIVISION_HISTORY.replace(':divisionId', id);
+  getDivisionHistoryHandler: (divisionId: string, handler: (v1Response: any) => any) => {
+    const url = V1_DIVISION_HISTORY.replace(':divisionId', divisionId);
 
     log('get', url);
     return fetch(url)
       .then(res => res.text())
       .then(handler);
   },
-  getPlayer: (division: string, playerId: string, handler: (v1Response: any) => any) => {
-    const url = V1_DIVISION_PLAYER.replace(':divisionId', division).replace(':playerId', playerId);
+  getPlayer: (divisionId: string, playerId: string, handler: (v1Response: any) => any) => {
+    const url = V1_DIVISION_PLAYER.replace(':divisionId', divisionId).replace(':playerId', playerId);
+
+    log('get', url);
+    return fetch(url)
+      .then(res => res.text())
+      .then(handler);
+  },
+
+  // Simulator
+  getSimulationData: (matchId: string, handler: (v1Response: any) => any) => {
+    const url = V1_MATCH_SIMULATOR.replace(':matchId', matchId);
 
     log('get', url);
     return fetch(url)

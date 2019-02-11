@@ -2,6 +2,7 @@ import {
   DIVISION,
   DIVISION_HISTORY,
   DIVISION_PLAYER,
+  MATCH_SIMULATOR,
   SEASON_DIVISIONS,
   SEASON_SUMMARY,
   SEASONS,
@@ -9,6 +10,10 @@ import {
 
 import { getDivisionHandler, getDivisionHistoryHandler, getPlayerHandler } from './modules/divisions';
 import { getSeasonHandler, getSeasonsHandler, getSeasonSummaryHandler } from './modules/seasons';
+import { getSimulationDataHandler } from './modules/simulator';
+import mocks from './mocks';
+
+import { useMocks } from '../constants/config';
 
 interface IEndpoint {
   handler: (req: any, res: any) => Promise<any>;
@@ -19,12 +24,12 @@ interface IEndpoint {
 export const endpoints: IEndpoint[] = [
   // Seasons
   {
-    handler: getSeasonsHandler,
+    handler: useMocks ? mocks.getSeasonsHandler : getSeasonsHandler,
     method: 'get',
     path: SEASONS,
   },
   {
-    handler: getSeasonSummaryHandler,
+    handler: useMocks ? mocks.getSeasonSummaryHandler : getSeasonSummaryHandler,
     method: 'get',
     path: SEASON_SUMMARY,
   },
@@ -49,5 +54,12 @@ export const endpoints: IEndpoint[] = [
     handler: getPlayerHandler,
     method: 'get',
     path: DIVISION_PLAYER,
+  },
+
+  // Simulator
+  {
+    handler: getSimulationDataHandler,
+    method: 'get',
+    path: MATCH_SIMULATOR,
   },
 ];

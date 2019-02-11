@@ -15,9 +15,9 @@ export const parseMatchDetailsButton = (innerHTML?: string) => {
   }
 
   return Array.from(table.children[0].children).map(tr => ({
-    foreigners: tr.children[2].innerHTML,
     locals: tr.children[0].innerHTML,
     result: tr.children[1].innerHTML,
+    visitors: tr.children[2].innerHTML,
   }));
 };
 
