@@ -34,14 +34,14 @@ export const endpoints: IEndpoint[] = [
     path: SEASON_SUMMARY,
   },
   {
-    handler: getSeasonHandler,
+    handler: useMocks ? mocks.getSeasonHandler : getSeasonHandler,
     method: 'get',
     path: SEASON_DIVISIONS,
   },
 
   // Divisions
   {
-    handler: getDivisionHandler,
+    handler: useMocks ? mocks.getDivisionHandler : getDivisionHandler,
     method: 'get',
     path: DIVISION,
   },

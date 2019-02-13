@@ -1,224 +1,184 @@
-const matches = [
+const pendingMatches = [
   {
-    id: '1',
+    id: '11',
     division: '1',
-    date: new Date('2015-01-15').getTime(),
     matches: [
       {
         locals: ['1', '2'],
         visitors: ['3', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '3'],
         visitors: ['2', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '4'],
         visitors: ['3', '2'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '2',
+    id: '12',
     division: '2',
-    date: new Date('2015-02-15').getTime(),
     matches: [
       {
         locals: ['5', '6'],
         visitors: ['7', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '7'],
         visitors: ['6', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '8'],
         visitors: ['7', '6'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '3',
+    id: '13',
     division: '3',
-    date: new Date('2016-01-15').getTime(),
     matches: [
       {
         locals: ['1', '2'],
         visitors: ['3', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '3'],
         visitors: ['2', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '4'],
         visitors: ['3', '2'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '4',
+    id: '14',
     division: '4',
-    date: new Date('2016-02-15').getTime(),
     matches: [
       {
         locals: ['5', '6'],
         visitors: ['7', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '7'],
         visitors: ['6', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '8'],
         visitors: ['7', '6'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '5',
+    id: '15',
     division: '5',
-    date: new Date('2017-01-15').getTime(),
     matches: [
       {
         locals: ['1', '2'],
         visitors: ['3', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '3'],
         visitors: ['2', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '4'],
         visitors: ['3', '2'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '6',
+    id: '16',
     division: '6',
-    date: new Date('2017-02-15').getTime(),
     matches: [
       {
         locals: ['5', '6'],
         visitors: ['7', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '7'],
         visitors: ['6', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '8'],
         visitors: ['7', '6'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '1',
+    id: '17',
     division: '7',
-    date: new Date('2018-01-15').getTime(),
     matches: [
       {
         locals: ['1', '2'],
         visitors: ['3', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '3'],
         visitors: ['2', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '4'],
         visitors: ['3', '2'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '1',
+    id: '18',
     division: '8',
-    date: new Date('2018-02-15').getTime(),
     matches: [
       {
         locals: ['5', '6'],
         visitors: ['7', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '7'],
         visitors: ['6', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '8'],
         visitors: ['7', '6'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '1',
+    id: '19',
     division: '9',
-    date: new Date('2019-01-15').getTime(),
     matches: [
       {
         locals: ['1', '2'],
         visitors: ['3', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '3'],
         visitors: ['2', '4'],
-        result: [1, 3],
       },
       {
         locals: ['1', '4'],
         visitors: ['3', '2'],
-        result: [1, 3],
       },
     ],
   },
   {
-    id: '1',
+    id: '20',
     division: '10',
-    date: new Date('2019-02-15').getTime(),
     matches: [
       {
         locals: ['5', '6'],
         visitors: ['7', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '7'],
         visitors: ['6', '8'],
-        result: [1, 3],
       },
       {
         locals: ['5', '8'],
         visitors: ['7', '6'],
-        result: [1, 3],
       },
     ],
   },
 ];
 
-export default matches;
+export default pendingMatches;

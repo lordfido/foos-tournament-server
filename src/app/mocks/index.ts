@@ -1,8 +1,6 @@
-import seasons from './seasons';
-import divisions from './divisions';
-import players from './players';
-import matches from './matches';
-import divisionPlayers from './division-players';
+import seasons from './data/seasons';
+import divisions from './data/divisions';
+import { getDivisionRecentMatches, getDivisionRanking, getDivisionPendingMatches } from './utils';
 
 // @ts-ignore
 const getSeasonsHandler = (req, res) => res.send(seasons);
@@ -20,88 +18,48 @@ const getSeasonSummaryHandler = (req, res) => {
 
   return res.send({
     seasonId: season.id,
-    divisionRankings: seasonDivisions.map(d => {
-      const dPlayers = divisionPlayers.find(di => di.division === d.id);
+    divisionRankings: getDivisionRanking(seasonDivisions.map(d => d.id)),
+    recentMatches: getDivisionRecentMatches(seasonDivisions.map(d => d.id)),
+  });
+};
 
-      if (!dPlayers) {
-        return undefined;
-      }
+// @ts-ignore
+const getSeasonHandler = (req, res) => {
+  const { seasonId } = req.params;
 
-      return {
-        division: d.label,
-        ranking: dPlayers.players.map((p, idx) => {
-          const player = players.find(pl => pl.id === p);
+  const seasonDivisions = divisions
+    .filter(d => d.season === seasonId)
+    .map(d => ({
+      id: d.id,
+      label: d.label,
+    }));
 
-          if (!player) {
-            return undefined;
-          }
+  return res.send(seasonDivisions);
+};
 
-          return {
-            player: player.name,
-            position: idx + 1,
-            points: 150,
-          };
-        }),
-      };
-    }),
-    recentMatches: matches
-      .filter(m => seasonDivisions.findIndex(d => d.id === m.division) >= 0)
-      .map(m => {
-        const division = divisions.find(d => d.id === m.division);
-        const matchPlayers = [...m.matches[0].locals, ...m.matches[0].visitors];
+// @ts-ignore
+const getDivisionHandler = (req, res) => {
+  const { divisionId } = req.params;
 
-        if (!division) {
-          return undefined;
-        }
+  const division = divisions.find(d => d.id === divisionId);
 
-        return {
-          date: m.date,
-          division: division.label,
-          matches: m.matches.map(ma => {
-            const getPlayerName = (p: string) => {
-              const player = players.find(pl => pl.id === p);
+  if (!division) {
+    return res.send();
+  }
 
-              if (!player) {
-                return undefined;
-              }
-
-              return player.name;
-            };
-
-            const locals = ma.locals.map(getPlayerName);
-            const visitors = ma.visitors.map(getPlayerName);
-
-            return {
-              locals: `${locals[0]} + ${locals[1]}`,
-              result: `${ma.result[0]}-${ma.result[1]}`,
-              visitors: `${visitors[0]} + ${visitors[1]}`,
-            };
-          }),
-          players: matchPlayers.map(p => {
-            const player = players.find(pl => pl.id === p);
-            const wins = m.matches.filter(
-              ma =>
-                (ma.locals.findIndex(pla => pla === p) >= 0 && ma.result[0] > ma.result[1]) ||
-                (ma.visitors.findIndex(pla => pla === p) >= 0 && ma.result[0] < ma.result[1])
-            );
-
-            if (!player) {
-              return undefined;
-            }
-
-            return {
-              name: player.name,
-              wins: wins.length,
-            };
-          }),
-        };
-      }),
+  return res.send({
+    pendingMatches: getDivisionPendingMatches([division.id]),
+    playedMatches: getDivisionRecentMatches([division.id], true),
+    ranking: getDivisionRanking([division.id]),
   });
 };
 
 const mocks = {
   getSeasonsHandler,
   getSeasonSummaryHandler,
+  getSeasonHandler,
+
+  getDivisionHandler,
 };
 
 export default mocks;
