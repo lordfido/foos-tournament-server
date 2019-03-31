@@ -29,6 +29,12 @@ const initServer = () => {
   const app = express();
   server.applyMiddleware({ app });
 
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
   endpoints.map(({ handler, method, path }) => {
     log('Setting up endpoint', method, path);
     app[method](path, handler);
