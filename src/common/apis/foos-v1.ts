@@ -6,10 +6,10 @@ import {
   V1_DIVISION,
   V1_DIVISION_HISTORY,
   V1_DIVISION_PLAYER,
+  V1_MATCH_SIMULATOR,
   V1_SEASON,
   V1_SEASON_SUMMARY,
   V1_SEASONS,
-  V1_MATCH_SIMULATOR,
 } from '../../constants/v1-routes';
 import { log } from '../utils/logger';
 

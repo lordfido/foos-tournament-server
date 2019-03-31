@@ -8,10 +8,11 @@ import {
   SEASONS,
 } from '../constants/v2-routes';
 
+import mocks from './mocks';
+
 import { getDivisionHandler, getDivisionHistoryHandler, getPlayerHandler } from './modules/divisions';
 import { getSeasonHandler, getSeasonsHandler, getSeasonSummaryHandler } from './modules/seasons';
 import { getSimulationDataHandler } from './modules/simulator';
-import mocks from './mocks';
 
 import { useMocks } from '../constants/config';
 

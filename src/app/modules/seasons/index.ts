@@ -135,6 +135,6 @@ export const getSeasonHandler = (req, res) => {
       })
       .filter(division => division);
 
-    return res.send({ divisions });
+    return res.send(divisions);
   });
 };
