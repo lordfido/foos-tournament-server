@@ -1,42 +1,42 @@
-import path from "path";
+import path from 'path';
 // @ts-ignore
-import UglifyPlugin from "terser-webpack-plugin";
-import webpack from "webpack";
+import UglifyPlugin from 'terser-webpack-plugin';
+import webpack from 'webpack';
 
 export const paths = {
-  dist: path.resolve(__dirname, "..", "dist"),
-  root: path.resolve(__dirname, ".."),
-  src: path.resolve(__dirname, "..", "src")
+  dist: path.resolve(__dirname, '..', 'dist'),
+  root: path.resolve(__dirname, '..'),
+  src: path.resolve(__dirname, '..', 'src'),
 };
 
 export const regex = {
   mjs: /\.mjs$/,
-  ts: /\.(tsx?|js)$/
+  ts: /\.(tsx?|js)$/,
 };
 
 export const uglifyPlugin = new UglifyPlugin();
 
 const baseConfig: webpack.Configuration = {
-  target: "node",
+  target: 'node',
 
-  mode: "development",
+  mode: 'development',
 
-  devtool: "source-map",
+  devtool: 'source-map',
 
-  entry: ["babel-polyfill", path.resolve(paths.src, "index.tsx")],
+  entry: ['babel-polyfill', path.resolve(paths.src, 'index.tsx')],
 
   output: {
-    filename: "[name]-[hash].js",
+    filename: '[name]-[hash].js',
     path: paths.dist,
-    publicPath: "/"
+    publicPath: '/',
   },
 
   module: {
     rules: [
       {
-        test: regex.mjs,
         include: /node_modules/,
-        type: "javascript/auto"
+        test: regex.mjs,
+        type: 'javascript/auto',
       },
 
       // JS, TS and TSX
@@ -46,19 +46,19 @@ const baseConfig: webpack.Configuration = {
         test: regex.ts,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-              sourceMap: true
-            }
-          }
-        ]
-      }
-    ]
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+    ],
   },
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".mjs"]
-  }
+    extensions: ['.ts', '.tsx', '.js', '.mjs'],
+  },
 };
 
 export default baseConfig;
