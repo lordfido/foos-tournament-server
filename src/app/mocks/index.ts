@@ -1,12 +1,11 @@
-import seasons from './data/seasons';
+import { RequestHandler } from 'express';
 import divisions from './data/divisions';
-import { getDivisionRecentMatches, getDivisionRanking, getDivisionPendingMatches } from './utils';
+import seasons from './data/seasons';
+import { getDivisionPendingMatches, getDivisionRanking, getDivisionRecentMatches } from './utils';
 
-// @ts-ignore
-const getSeasonsHandler = (req, res) => res.send(seasons);
+const getSeasonsHandler: RequestHandler = (req, res) => res.send(seasons);
 
-// @ts-ignore
-const getSeasonSummaryHandler = (req, res) => {
+const getSeasonSummaryHandler: RequestHandler = (req, res) => {
   const { seasonId } = req.params;
 
   const season = seasons.find(s => s.id === seasonId);
@@ -17,14 +16,13 @@ const getSeasonSummaryHandler = (req, res) => {
   const seasonDivisions = divisions.filter(d => d.season === season.id);
 
   return res.send({
-    seasonId: season.id,
     divisionRankings: getDivisionRanking(seasonDivisions.map(d => d.id)),
     recentMatches: getDivisionRecentMatches(seasonDivisions.map(d => d.id)),
+    seasonId: season.id,
   });
 };
 
-// @ts-ignore
-const getSeasonHandler = (req, res) => {
+const getSeasonHandler: RequestHandler = (req, res) => {
   const { seasonId } = req.params;
 
   const seasonDivisions = divisions
@@ -37,8 +35,7 @@ const getSeasonHandler = (req, res) => {
   return res.send(seasonDivisions);
 };
 
-// @ts-ignore
-const getDivisionHandler = (req, res) => {
+const getDivisionHandler: RequestHandler = (req, res) => {
   const { divisionId } = req.params;
 
   const division = divisions.find(d => d.id === divisionId);
@@ -55,9 +52,9 @@ const getDivisionHandler = (req, res) => {
 };
 
 const mocks = {
-  getSeasonsHandler,
-  getSeasonSummaryHandler,
   getSeasonHandler,
+  getSeasonSummaryHandler,
+  getSeasonsHandler,
 
   getDivisionHandler,
 };

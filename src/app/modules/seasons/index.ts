@@ -1,11 +1,11 @@
+import { RequestHandler } from 'express';
 import { JSDOM } from 'jsdom';
 import { log } from '../../../common/utils/logger';
 
 import v1Api from '../../../common/apis/foos-v1';
 import { parseMatchDetailsButton } from '../../utils/parser';
 
-// @ts-ignore
-export const getSeasonsHandler = (req, res) =>
+export const getSeasonsHandler: RequestHandler = (req, res) =>
   v1Api.getSeasons(v1Response => {
     const dom = new JSDOM(v1Response);
     const document = dom.window.document;
@@ -33,8 +33,7 @@ export const getSeasonsHandler = (req, res) =>
     return res.send(seasons);
   });
 
-// @ts-ignore
-export const getSeasonSummaryHandler = (req, res) => {
+export const getSeasonSummaryHandler: RequestHandler = (req, res) => {
   const { seasonId } = req.params;
   log('Param received', seasonId);
 
@@ -105,8 +104,7 @@ export const getSeasonSummaryHandler = (req, res) => {
   });
 };
 
-// @ts-ignore
-export const getSeasonHandler = (req, res) => {
+export const getSeasonHandler: RequestHandler = (req, res) => {
   const { seasonId } = req.params;
   log('Param received', seasonId);
 

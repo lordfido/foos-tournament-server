@@ -1,6 +1,4 @@
-// @ts-ignore
 import fetch from 'node-fetch';
-// import request from 'request';
 
 import {
   V1_DIVISION,

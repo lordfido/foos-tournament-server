@@ -1,10 +1,10 @@
+import { RequestHandler } from 'express';
 import { JSDOM } from 'jsdom';
 import { log } from '../../../common/utils/logger';
 
 import v1Api from '../../../common/apis/foos-v1';
 
-// @ts-ignore
-export const getSimulationDataHandler = (req, res) => {
+export const getSimulationDataHandler: RequestHandler = (req, res) => {
   const { matchId } = req.params;
   log('Param received', matchId);
 

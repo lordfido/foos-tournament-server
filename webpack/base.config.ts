@@ -1,5 +1,4 @@
 import path from 'path';
-// @ts-ignore
 import UglifyPlugin from 'terser-webpack-plugin';
 import webpack from 'webpack';
 
@@ -23,10 +22,10 @@ const baseConfig: webpack.Configuration = {
 
   devtool: 'source-map',
 
-  entry: ['babel-polyfill', path.resolve(paths.src, 'index.tsx')],
+  entry: [path.resolve(paths.src, 'index.ts')],
 
   output: {
-    filename: '[name]-[hash].js',
+    filename: 'app.js',
     path: paths.dist,
     publicPath: '/',
   },

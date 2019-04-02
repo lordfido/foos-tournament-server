@@ -1,11 +1,11 @@
+import { RequestHandler } from 'express';
 import { JSDOM } from 'jsdom';
 import { log } from '../../../common/utils/logger';
 
 import v1Api from '../../../common/apis/foos-v1';
-import { parseMatchDetailsButton, parseHistoriTable } from '../../utils/parser';
+import { parseHistoriTable, parseMatchDetailsButton } from '../../utils/parser';
 
-// @ts-ignore
-export const getDivisionHandler = (req, res) => {
+export const getDivisionHandler: RequestHandler = (req, res) => {
   const { divisionId } = req.params;
   log('Param received', divisionId);
 
@@ -92,16 +92,14 @@ export const getDivisionHandler = (req, res) => {
   });
 };
 
-// @ts-ignore
-export const getDivisionHistoryHandler = (req, res) => {
+export const getDivisionHistoryHandler: RequestHandler = (req, res) => {
   const { divisionId } = req.params;
   log('Param received', divisionId);
 
   return v1Api.getDivisionHistoryHandler(divisionId, v1Response => res.send(parseHistoriTable(v1Response)));
 };
 
-// @ts-ignore
-export const getPlayerHandler = (req, res) => {
+export const getPlayerHandler: RequestHandler = (req, res) => {
   const { divisionId, playerId } = req.params;
   log('Param received', divisionId, playerId);
 

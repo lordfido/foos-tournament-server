@@ -1,7 +1,7 @@
 const pendingMatches = [
   {
-    id: '11',
     division: '1',
+    id: '11',
     matches: [
       {
         locals: ['1', '2'],
@@ -18,8 +18,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '12',
     division: '2',
+    id: '12',
     matches: [
       {
         locals: ['5', '6'],
@@ -36,8 +36,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '13',
     division: '3',
+    id: '13',
     matches: [
       {
         locals: ['1', '2'],
@@ -54,8 +54,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '14',
     division: '4',
+    id: '14',
     matches: [
       {
         locals: ['5', '6'],
@@ -72,8 +72,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '15',
     division: '5',
+    id: '15',
     matches: [
       {
         locals: ['1', '2'],
@@ -90,8 +90,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '16',
     division: '6',
+    id: '16',
     matches: [
       {
         locals: ['5', '6'],
@@ -108,8 +108,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '17',
     division: '7',
+    id: '17',
     matches: [
       {
         locals: ['1', '2'],
@@ -126,8 +126,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '18',
     division: '8',
+    id: '18',
     matches: [
       {
         locals: ['5', '6'],
@@ -144,8 +144,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '19',
     division: '9',
+    id: '19',
     matches: [
       {
         locals: ['1', '2'],
@@ -162,8 +162,8 @@ const pendingMatches = [
     ],
   },
   {
-    id: '20',
     division: '10',
+    id: '20',
     matches: [
       {
         locals: ['5', '6'],

@@ -1,3 +1,4 @@
+import { RequestHandler } from 'express';
 import {
   DIVISION,
   DIVISION_HISTORY,
@@ -17,7 +18,7 @@ import { getSimulationDataHandler } from './modules/simulator';
 import { useMocks } from '../constants/config';
 
 interface IEndpoint {
-  handler: (req: any, res: any) => Promise<any>;
+  handler: RequestHandler;
   method: 'get' | 'post' | 'put' | 'patch' | 'delete';
   path: string;
 }

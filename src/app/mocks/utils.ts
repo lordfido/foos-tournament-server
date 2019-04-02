@@ -1,8 +1,8 @@
+import divisionPlayers from './data/division-players';
 import divisions from './data/divisions';
 import matches from './data/matches';
-import players from './data/players';
-import divisionPlayers from './data/division-players';
 import pendingMatches from './data/pending-matches';
+import players from './data/players';
 
 export const getDivisionPendingMatches = (divisionIds: string[]) =>
   pendingMatches
@@ -16,8 +16,8 @@ export const getDivisionPendingMatches = (divisionIds: string[]) =>
       }
 
       return {
-        id: m.id,
         division: divisionIds.length <= 1 ? undefined : division.label,
+        id: m.id,
         players: matchPlayers.map(p => {
           const player = players.find(pl => pl.id === p);
 
@@ -107,8 +107,8 @@ export const getDivisionRanking = (divisionIds: string[]) => {
 
           return {
             player: player.name,
-            position: idx + 1,
             points: 150,
+            position: idx + 1,
           };
         }),
       };

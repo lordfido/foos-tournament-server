@@ -16,15 +16,14 @@
     }
   },
   "scripts": {
-    "lint": "tslint **/*.ts **/*.tsx",
-    "check-types": "tsc",
+    "lint": "tslint ./**/*.ts ./**/*.tsx",
+    "check-types": "tsc --skipLibCheck",
     "prettier": "prettier --config .prettierrc --write './src/**/*.tsx' './src/**/*.ts' './src/**/*.js'",
     "clean:build": "rimraf dist",
     "pre-build": "npm run lint && npm run check-types && npm run prettier && npm run clean:build",
     "build:dev": "npm run pre-build && webpack --config ./webpack/dev.config.ts",
     "build:pre": "npm run pre-build && webpack --config ./webpack/pre.config.ts",
     "build": "npm run pre-build && webpack --config ./webpack/prod.config.ts",
-    "serve:https": "webpack-dev-server --host 0.0.0.0 --https true --config ./webpack/dev.config.ts",
     "precommit": "lint-staged",
     "serve": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "start": "npm run serve"
@@ -52,6 +51,7 @@
     "@types/node": "^11.13.0",
     "@types/node-fetch": "^2.1.7",
     "@types/query-string": "^6.3.0",
+    "@types/terser-webpack-plugin": "^1.2.1",
     "@types/uuid": "^3.4.4",
     "@types/webpack": "^4.4.26",
     "autoprefixer": "^9.5.0",
