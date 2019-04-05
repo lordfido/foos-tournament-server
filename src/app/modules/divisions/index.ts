@@ -35,20 +35,21 @@ export const getDivisionHandler: RequestHandler = (req, res) => {
           })
       : undefined;
 
-    const pendingMatches = pendingMatchesNode
-      ? Array.from(pendingMatchesNode.children[0].children).map(tr => {
-          const predictButton = tr.children[4].children[0] as HTMLElement;
-          return {
-            id: Number(predictButton.dataset.matchId),
-            players: [
-              tr.children[0].innerHTML,
-              tr.children[1].innerHTML,
-              tr.children[2].innerHTML,
-              tr.children[3].innerHTML,
-            ],
-          };
-        })
-      : undefined;
+    const pendingMatches =
+      pendingMatchesNode && pendingMatchesNode.children[0]
+        ? Array.from(pendingMatchesNode.children[0].children).map(tr => {
+            const predictButton = tr.children[4].children[0] as HTMLElement;
+            return {
+              id: Number(predictButton.dataset.matchId),
+              players: [
+                tr.children[0].innerHTML,
+                tr.children[1].innerHTML,
+                tr.children[2].innerHTML,
+                tr.children[3].innerHTML,
+              ],
+            };
+          })
+        : undefined;
 
     const playedMatches = playedMatchesNode
       ? Array.from(playedMatchesNode.children[0].children)
